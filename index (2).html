@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Velvet Cafe - Premium Coffee, Fresh Pasta & Wood Fired Pizza in Karachi">
+    <meta name="theme-color" content="#6B1A1A">
+    
+    <title>Velvet Cafe - Indulge in Every Moment</title>
+    
+    <!-- Google Fonts Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== CSS VARIABLES - COLOR PALETTE ========== */
+        :root {
+            --primary: #6B1A1A;
+            --secondary: #8B0000;
+            --accent: #C4956A;
+            --dark-bg: #1A0A0A;
+            --card-bg: #2C1010;
+            --text-light: #F5E6D3;
+            --text-gold: #D4A96A;
+            --blur-bg: rgba(26, 10, 10, 0.85);
+        }
+
+        /* ========== GLOBAL STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes typing {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px var(--text-gold), 0 0 20px var(--text-gold); }
+            50% { text-shadow: 0 0 20px var(--text-gold), 0 0 40px var(--text-gold); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @keyframes cardLift {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ========== NAVBAR ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: var(--blur-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            padding: 1rem 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-gold);
+            letter-spacing: 3px;
+            animation: fadeIn 1s ease;
+        }
+
+        .tagline-small {
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--text-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-gold);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #1A0A0A 0%, #4A0E0E 40%, #6B1A1A 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(196, 149, 106, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero-welcome {
+            font-size: 1rem;
+            color: var(--accent);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            animation: slideIn 0.8s ease;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--text-gold);
+            margin: 1rem 0;
+            animation: glow 3s ease infinite;
+            letter-spacing: 8px;
+            text-shadow: 0 0 30px rgba(212, 169, 106, 0.4);
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-style: italic;
+            opacity: 0.9;
+            animation: typing 2s steps(40) forwards;
+            overflow: hidden;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideIn 1.2s ease;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Raleway', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--text-light);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            box-shadow: 0 0 20px var(--secondary), inset 0 0 20px rgba(139, 0, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-gold);
+            border: 2px solid var(--text-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--text-gold);
+            transform: scale(1.05);
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: var(--text-gold);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        /* ========== MARQUEE STRIP ========== */
+        .marquee-section {
+            background: var(--primary);
+            padding: 2rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-gold);
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+            letter-spacing: 2px;
+        }
+
+        /* ========== SECTION STYLES ========== */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            color: var(--text-gold);
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 3px;
+            background: var(--text-gold);
+            margin: 1rem auto 3rem;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--text-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .about-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--text-gold);
+            margin: 2rem 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(196, 149, 106, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--text-gold);
+            box-shadow: 0 0 25px rgba(212, 169, 106, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--text-gold);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--text-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ========== MENU SECTION ========== */
+        .menu {
+            background: rgba(44, 16, 16, 0.5);
+            border-radius: 10px;
+            padding: 3rem;
+        }
+
+        .menu-tabs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab {
+            padding: 0.8rem 1.8rem;
+            background: transparent;
+            border: 2px solid var(--text-gold);
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Raleway', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .menu-tab.active {
+            background: var(--primary);
+            color: var(--text-gold);
+            box-shadow: 0 0 20px rgba(212, 169, 106, 0.4);
+        }
+
+        .menu-tab:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(212, 169, 106, 0.3);
+        }
+
+        .menu-category {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-category.active {
+            display: grid;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .menu-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border: 2px solid rgba(196, 149, 106, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.5);
+        }
+
+        .menu-item h3 {
+            color: var(--text-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .menu-price {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: var(--dark-bg);
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .menu-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* ========== SPECIAL OFFER BANNER ========== */
+        .special-offer {
+            background: linear-gradient(135deg, #6B1A1A, #1A0A0A);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 4rem auto;
+            max-width: 1000px;
+        }
+
+        .special-offer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 169, 106, 0.1) 0%, transparent 70%);
+            animation: shimmer 4s ease infinite;
+        }
+
+        .offer-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--text-gold);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+            animation: float 3s ease infinite;
+        }
+
+        /* ========== GALLERY SECTION ========== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            background-color: linear-gradient(135deg, #6B1A1A, #4A0E0E, #2C1010);
+        }
+
+        .gallery-item::before {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--text-light);
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover::before {
+            background: rgba(107, 26, 26, 0.9);
+            color: var(--text-gold);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(107, 26, 26, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* ========== TESTIMONIALS SECTION ========== */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border: 1px solid rgba(196, 149, 106, 0.2);
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--text-gold);
+            box-shadow: 0 0 30px rgba(212, 169, 106, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .quote-mark {
+            font-size: 3rem;
+            color: var(--text-gold);
+            opacity: 0.5;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .stars {
+            color: var(--text-gold);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* ========== RESERVATION SECTION ========== */
+        .reservation {
+            background: linear-gradient(135deg, #4A0E0E, #2C1010);
+            border-radius: 10px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .reservation h2 {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(26, 10, 10, 0.8);
+            border: 2px solid rgba(196, 149, 106, 0.3);
+            color: var(--text-light);
+            border-radius: 5px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--text-gold);
+            box-shadow: 0 0 15px rgba(212, 169, 106, 0.3);
+            background: rgba(26, 10, 10, 0.95);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--accent);
+            color: var(--dark-bg);
+            border: 2px solid var(--accent);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--text-gold);
+            box-shadow: 0 0 25px rgba(212, 169, 106, 0.5);
+            transform: scale(1.02);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--dark-bg);
+            border-top: 1px solid rgba(196, 149, 106, 0.3);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(196, 149, 106, 0.2);
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-gold);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-tagline {
+            color: var(--accent);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--text-gold);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(196, 149, 106, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            color: var(--text-gold);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(212, 169, 106, 0.5);
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(196, 149, 106, 0.2);
+            padding-top: 2rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                right: 0;
+                background: var(--blur-bg);
+                flex-direction: column;
+                width: 100%;
+                padding: 2rem;
+                gap: 1rem;
+                border-top: 1px solid var(--accent);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+                margin: 0.5rem 0;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .marquee-text {
+                font-size: 1rem;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            section h2 {
+                font-size: 2.5rem;
+            }
+
+            .menu {
+                padding: 2rem;
+            }
+
+            .menu-tabs {
+                gap: 0.5rem;
+            }
+
+            .menu-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .marquee-text {
+                font-size: 0.8rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .menu-item {
+                padding: 1.5rem;
+            }
+
+            .menu-price {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== NAVBAR ========== -->
+    <nav>
+        <div class="logo-section">
+            <div class="logo">VELVET</div>
+            <div class="tagline-small">Indulge in Every Moment</div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reserve">Reserve</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-welcome">Welcome to</div>
+            <h1 class="hero-title">VELVET</h1>
+            <p class="hero-tagline">Indulge in Every Moment</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('menu').scrollIntoView();">Explore Menu</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('reserve').scrollIntoView();">Reserve a Table</button>
+            </div>
+        </div>
+        <div class="scroll-arrow" onclick="document.getElementById('marquee').scrollIntoView();">↓</div>
+    </section>
+
+    <!-- ========== MARQUEE STRIP ========== -->
+    <section class="marquee-section" id="marquee">
+        <div class="marquee-text">
+            ★ PREMIUM COFFEE ✦ FRESH PASTA ✦ WOOD FIRED PIZZA ✦ VELVET EXPERIENCE ✦ KARACHI'S FINEST ★
+        </div>
+    </section>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h3>Our Story</h3>
+            <p>Velvet Cafe is Karachi's premier destination for luxury dining. We craft an experience where every moment becomes unforgettable, blending artisanal coffee, authentic Italian pasta, and wood-fired pizza perfection.</p>
+            <p>Our carefully curated menu showcases the finest ingredients, prepared by passionate chefs who believe in excellence. From your first sip of our signature Velvet Espresso to the last bite of our Velvet Special pizza, you'll discover why we're Karachi's most sought-after culinary sanctuary.</p>
+            <p>Welcome to a world where taste, ambiance, and service converge in pure indulgence.</p>
+            <div class="about-divider"></div>
+        </div>
+        <div class="features">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🍷</div>
+                <h3>Curated Menu</h3>
+                <p>Handpicked selections from around the world, expertly prepared for your palate</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">☕</div>
+                <h3>Artisan Coffee</h3>
+                <p>Premium beans roasted to perfection, creating the ultimate coffee experience</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">✨</div>
+                <h3>Velvet Ambiance</h3>
+                <p>Luxurious setting designed for conversation, comfort, and unforgettable moments</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MENU SECTION ========== -->
+    <section class="menu" id="menu">
+        <h2>Our Menu</h2>
+        <div class="section-divider"></div>
+
+        <div class="menu-tabs">
+            <button class="menu-tab active" onclick="switchMenu('coffee')">Coffee</button>
+            <button class="menu-tab" onclick="switchMenu('food')">Food</button>
+            <button class="menu-tab" onclick="switchMenu('pasta')">Pasta</button>
+            <button class="menu-tab" onclick="switchMenu('pizza')">Pizza</button>
+        </div>
+
+        <!-- Coffee Menu -->
+        <div class="menu-category coffee active" id="coffee">
+            <div class="menu-item">
+                <div class="menu-price">PKR 350</div>
+                <h3>Velvet Espresso</h3>
+                <p class="menu-description">Single shot of perfectly extracted specialty coffee</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 480</div>
+                <h3>Signature Latte</h3>
+                <p class="menu-description">Velvety milk with our signature espresso blend</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 520</div>
+                <h3>Caramel Macchiato</h3>
+                <p class="menu-description">Rich espresso topped with caramel and steamed milk</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 450</div>
+                <h3>Cold Brew Classic</h3>
+                <p class="menu-description">Smooth, refreshing cold brew served with ice</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 500</div>
+                <h3>Velvet Mocha</h3>
+                <p class="menu-description">Perfect blend of espresso, chocolate, and milk</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 490</div>
+                <h3>Spanish Latte</h3>
+                <p class="menu-description">Condensed milk creates a sweet, luxurious experience</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 550</div>
+                <h3>Matcha Latte</h3>
+                <p class="menu-description">Creamy matcha green tea with steamed milk</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 470</div>
+                <h3>Dalgona Coffee</h3>
+                <p class="menu-description">Fluffy whipped coffee topped with milk</p>
+            </div>
+        </div>
+
+        <!-- Food Menu -->
+        <div class="menu-category food" id="food">
+            <div class="menu-item">
+                <div class="menu-price">PKR 650</div>
+                <h3>Club Sandwich</h3>
+                <p class="menu-description">Classic triple-layered with chicken, bacon, and fresh veggies</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 700</div>
+                <h3>Crispy Chicken Sandwich</h3>
+                <p class="menu-description">Golden fried chicken with special house sauce</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 550</div>
+                <h3>Grilled Veggie Sandwich</h3>
+                <p class="menu-description">Fresh grilled vegetables with premium cheese</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 850</div>
+                <h3>Breakfast Platter</h3>
+                <p class="menu-description">Eggs, bacon, toast, and fresh seasonal fruits</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 750</div>
+                <h3>Chicken Pesto Sandwich</h3>
+                <p class="menu-description">Tender chicken with basil pesto and mozzarella</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 900</div>
+                <h3>Smoked Beef Sandwich</h3>
+                <p class="menu-description">Premium smoked beef with caramelized onions</p>
+            </div>
+        </div>
+
+        <!-- Pasta Menu -->
+        <div class="menu-category pasta" id="pasta">
+            <div class="menu-item">
+                <div class="menu-price">PKR 950</div>
+                <h3>Chicken Alfredo</h3>
+                <p class="menu-description">Tender chicken in creamy parmesan sauce</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 800</div>
+                <h3>Penne Arrabiata</h3>
+                <p class="menu-description">Spicy tomato sauce with garlic and red chili</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 850</div>
+                <h3>Creamy Mushroom Pasta</h3>
+                <p class="menu-description">Sautéed mushrooms in rich cream sauce</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 900</div>
+                <h3>Velvet Rose Sauce Pasta</h3>
+                <p class="menu-description">Premium tomato and cream fusion sauce</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 980</div>
+                <h3>Smoked Chicken Pasta</h3>
+                <p class="menu-description">Delicate smoked chicken with garlic and herbs</p>
+            </div>
+        </div>
+
+        <!-- Pizza Menu -->
+        <div class="menu-category pizza" id="pizza">
+            <div class="menu-item">
+                <div class="menu-price">PKR 1100</div>
+                <h3>Margherita</h3>
+                <p class="menu-description">Fresh tomato, mozzarella, and basil on thin crust</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 1450</div>
+                <h3>Velvet Special</h3>
+                <p class="menu-description">Our signature blend: chicken, mushroom, and truffle oil</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 1350</div>
+                <h3>Chicken Tikka Pizza</h3>
+                <p class="menu-description">Tandoori chicken with yogurt sauce and fresh herbs</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 1300</div>
+                <h3>BBQ Chicken</h3>
+                <p class="menu-description">Smoky BBQ chicken with red onions and bell peppers</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-price">PKR 1400</div>
+                <h3>Four Cheese</h3>
+                <p class="menu-description">Blend of mozzarella, parmesan, gouda, and blue cheese</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SPECIAL OFFER BANNER ========== -->
+    <div class="special-offer">
+        <div class="offer-text">🎁 Happy Hours ✦ 3PM – 6PM ✦ 20% Off on All Beverages</div>
+    </div>
+
+    <!-- ========== GALLERY SECTION ========== -->
+    <section class="gallery-section" id="gallery">
+        <h2>Velvet Moments</h2>
+        <div class="section-divider"></div>
+        <div class="gallery">
+            <div class="gallery-item fade-in" data-label="Coffee Art" style="background-image: url('gallery/01-coffee-art.jpg');"></div>
+            <div class="gallery-item fade-in" data-label="Ambiance" style="background-image: url('gallery/02-ambiance.jpg');"></div>
+            <div class="gallery-item fade-in" data-label="Culinary Excellence" style="background-image: url('gallery/03-culinary.jpg');"></div>
+            <div class="gallery-item fade-in" data-label="Our Service" style="background-image: url('gallery/04-service.jpg');"></div>
+            <div class="gallery-item fade-in" data-label="Interior Design" style="background-image: url('gallery/05-interior.jpg');"></div>
+            <div class="gallery-item fade-in" data-label="Desserts & Treats" style="background-image: url('gallery/06-dessert.jpg');"></div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS SECTION ========== -->
+    <section class="testimonials-section">
+        <h2>What Our Guests Say</h2>
+        <div class="section-divider"></div>
+        <div class="testimonials">
+            <div class="testimonial-card fade-in">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">Karachi mein aisee cafe ka experience kabhi nahi mila. Velvet ne luxury aur taste ka perfect blend provide kiya. Must visit!</p>
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-author">Sara K.</div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">The Chicken Alfredo pasta was absolutely divine. Ambiance is perfect for both dates and family gatherings. Highly recommend!</p>
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-author">Ahmed R.</div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">Velvet lives up to its name - pure luxury in every detail. From coffee to pizza, everything is perfection. Will definitely come back!</p>
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-author">Maha S.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== RESERVATION SECTION ========== -->
+    <section class="reservation" id="reserve">
+        <h2>Reserve Your Table</h2>
+        <div class="section-divider"></div>
+        <form id="reservationForm" onsubmit="handleReservation(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date">Date *</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time *</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="guests">Number of Guests *</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Select number of guests</option>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                        <option value="7">7 Guests</option>
+                        <option value="8">8 Guests</option>
+                        <option value="9">9 Guests</option>
+                        <option value="10">10+ Guests</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="requests">Special Requests</label>
+                <textarea id="requests" name="requests" placeholder="Any dietary restrictions or special preferences?"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Confirm Reservation</button>
+        </form>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-logo">VELVET</div>
+                <div class="footer-tagline">Indulge in Every Moment</div>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#reserve">Reservations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Opening Hours</h3>
+                    <ul>
+                        <li>Monday - Sunday</li>
+                        <li>9:00 AM - 12:00 AM</li>
+                        <li style="margin-top: 1rem; color: var(--text-gold);">Always Open for You</li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Find Us</h3>
+                    <ul>
+                        <li>Clifton, Karachi</li>
+                        <li>Pakistan</li>
+                        <li style="margin-top: 1rem;"><a href="tel:+923000000000">+92 300 0000000</a></li>
+                    </ul>
+                    <div class="social-icons">
+                        <div class="social-icon" title="Instagram">📷</div>
+                        <div class="social-icon" title="Facebook">👍</div>
+                        <div class="social-icon" title="WhatsApp">💬</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Velvet Cafe. All rights reserved. Crafted with ❤️ in Karachi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ========== NAVBAR FUNCTIONALITY ==========
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const nav = document.querySelector('nav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar blur on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // ========== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ==========
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    const delay = Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100;
+                    entry.target.style.animationDelay = delay + 'ms';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ========== MENU TAB SWITCHING ==========
+        function switchMenu(category) {
+            // Hide all categories
+            document.querySelectorAll('.menu-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.menu-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected category
+            document.getElementById(category).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // ========== RESERVATION FORM HANDLING ==========
+        function handleReservation(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const guests = document.getElementById('guests').value;
+
+            // Show confirmation
+            alert(`Thank you ${name}! Your table for ${guests} guest(s) has been reserved for ${date} at ${time}. We'll contact you at ${phone} to confirm.`);
+
+            // Reset form
+            document.getElementById('reservationForm').reset();
+        }
+
+        // ========== SMOOTH SCROLL BEHAVIOR ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========== PAGE LOAD ANIMATION ==========
+        window.addEventListener('load', () => {
+            document.body.style.animation = 'fadeIn 1s ease';
+        });
+    </script>
+</body>
+</html>
